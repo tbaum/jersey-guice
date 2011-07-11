@@ -16,7 +16,8 @@ public class JpaInitializer {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
-    @Inject public JpaInitializer(PersistService persistService) throws Throwable {
+    @Inject
+    public JpaInitializer(PersistService persistService) throws Throwable {
         try {
             persistService.start();
         } catch (Throwable e) {
