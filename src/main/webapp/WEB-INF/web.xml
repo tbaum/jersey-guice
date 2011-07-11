@@ -4,6 +4,9 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
     <distributable/>
+    <listener>
+        <listener-class>test.ContextListener</listener-class>
+    </listener>
     <filter>
         <filter-name>GuiceFilter</filter-name>
         <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
@@ -11,10 +14,6 @@
 
     <filter-mapping>
         <filter-name>GuiceFilter</filter-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <listener>
-        <listener-class>test.ContextListener</listener-class>
-    </listener>
 </web-app>
