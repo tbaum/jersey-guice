@@ -6,51 +6,76 @@
     <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
-    <script type="text/javascript" src="js/coffee-script.js"></script>
+    <!--<script type="text/javascript" src="js/coffee-script.js"></script>-->
+    <!--<script type="text/coffeescript">-->
 
-    <script type="text/coffeescript">
+        <!--show_message = (msg) ->-->
+        <!--$('#message').hide().text(msg).fadeIn(2222,-->
+        <!---> $('#message').append('!')-->
+        <!--)-->
 
-        show_message = (msg) ->
-        $('#message').hide().text(msg).fadeIn(2222,
-        -> $('#message').append('!')
-        )
+        <!--$ -> show_message "world"-->
+        <!--$('#message').click -> show_message "you"-->
 
-        $ -> show_message "world"
-        $('#message').click -> show_message "you"
-
-    </script>
-
+    <!--</script>-->
 </head>
 
 
 <body>
 <h1>hello <span id="message"></span></h1>
 
-<button id="refresh">refresh</button>
+<input type="text" id="naming"/>
+
+<button id="add">Add name</button>
+<button id="refresh">Refresh list</button>
 <ul id="overview">
 
 </ul>
-<!--
 <script type="text/javascript">
 
-function refreshList(data) {
-   target = $("#overview")
+    function refreshList(data) {
+        target = $("#overview");
+        target.empty();
 
-   $(data).each(function () {
-       alert(this.id)
-   })
+        $(data).each(function () {
+            item = this.id + ': ' + this.name;
+            console.log('Appending new element: ' + item);
+            target.append('<li>' + item + '</li>');
+        })
 
-}
+    }
 
+    function addName() {
 
-$(function () {
-   $.getJSON('api', refreshList)
+        name = $("#naming").val();
 
-   $("#refresh").bind("click", function() {
-       $.getJSON('api', refreshList)
-   })
-})
-</script>     -->
+        if (name.length == 0) {
+            console.error('Input field was empty');
+            $("#naming").css('backgroundColor', '#B00').css('color', '#FFF');
+            return;
+        }
+
+        $("#naming").css('backgroundColor', '#FFF').css('color', '#000');
+        console.log("Adding new name: " + name);
+
+        $.getJSON('api/create/' + name, function() {
+            console.log('Added name: ' + name);
+            $("#naming").val("");
+        });
+
+    }
+
+    $(function () {
+        $.getJSON('api/list', refreshList);
+
+        $("#refresh").bind("click", function() {
+            console.log('Refreshing list...');
+            $.getJSON('api/list', refreshList)
+        });
+
+        $("#add").bind("click", addName);
+    })
+</script>
 </body>
 </html>
 
