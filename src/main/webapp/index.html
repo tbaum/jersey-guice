@@ -6,34 +6,51 @@
     <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.14.custom.min.js"></script>
+    <script type="text/javascript" src="js/coffee-script.js"></script>
+
+    <script type="text/coffeescript">
+
+        show_message = (msg) ->
+        $('#message').hide().text(msg).fadeIn(2222,
+        -> $('#message').append('!')
+        )
+
+        $ -> show_message "world"
+        $('#message').click -> show_message "you"
+
+    </script>
+
 </head>
+
+
 <body>
+<h1>hello <span id="message"></span></h1>
 
 <button id="refresh">refresh</button>
 <ul id="overview">
 
 </ul>
-
+<!--
 <script type="text/javascript">
 
-    function refreshList(data) {
-        target = $("#overview")
+function refreshList(data) {
+   target = $("#overview")
 
-        $(data).each(function () {
-            alert(this.id)
-        })
+   $(data).each(function () {
+       alert(this.id)
+   })
 
-    }
+}
 
 
-    $(function () {
-        $.getJSON('api', refreshList)
+$(function () {
+   $.getJSON('api', refreshList)
 
-        $("#refresh").bind("click", function() {
-            $.getJSON('api', refreshList)
-        })
-    })
-</script>
+   $("#refresh").bind("click", function() {
+       $.getJSON('api', refreshList)
+   })
+})
+</script>     -->
 </body>
 </html>
 
