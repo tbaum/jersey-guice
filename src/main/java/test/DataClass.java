@@ -11,11 +11,13 @@ import static javax.persistence.GenerationType.IDENTITY;
  * @author tbaum
  * @since 11.07.11
  */
-@Entity @XmlRootElement
+@Entity
+@XmlRootElement
 public class DataClass {
 // ------------------------------ FIELDS ------------------------------
 
-    @GeneratedValue(strategy = IDENTITY) @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Id
     private Long id;
 
     private String name;
